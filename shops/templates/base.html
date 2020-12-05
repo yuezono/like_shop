@@ -54,6 +54,22 @@
 
     {% block header %}{% endblock %}
 
+    {% if messages %}
+    <div class='container'>
+      <div class='row'>
+        <div class='my-dov-style w-100'>
+          <ul class='messages' style='list-style:none;'>
+          {%for message in messagees%}
+          <li{%if message.tags %}class='{{message.tags}}'{%endif%}>
+            {{message}}
+          </li>
+          {%endfor%}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {%endif%}
+
     {% block contents %}{% endblock %}
 
     <!-- Footer -->
@@ -67,6 +83,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
 
   </div>
 </body>
