@@ -41,6 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'shops',
+    'accounts',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +145,36 @@ MESSAGE_TAGS = {
     messages.SUCCESS:'alert alert-success',
     messages.INFO:'alert alert-info',
 }
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+#django-allauthで利用するdjango.contrib.sitesを使う為にサイト識別用IDの設定
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthentivationBackend',
+    #一般ユーザー用（メールアドレス認証）
+    'django.contrib.auth.backends.ModelBackend',
+    #管理サイト用（ユーザー名認証）
+)
+
+#メールアドレス認証に変更する設定
+ACCOUNT_AUTHENTIVATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+
+#サインアップにメールアドレス確認をはさむよう設定
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+
+# #ログイン／ログラウト後の設定
+LOGIN_REDIRECT_URL = 'shops:index'
+ACCONT_LOGOUT_REDIRECT_URL = 'accont_login'
+
+# #ログアウトリンクのクリックで一発でログアウトする設定
+ACCOUNT_LOGOUT_ON_GET = True
+
+# #django-allauthが送信するメールの件名に自動される節頭辞をブランクにする設定
+ACCOUNT_EMAIL_SUBJECT_PREFIX =''
+
+# #デフォルトのメール送信元を設定
+DEFAULT_FORM_EMAIL = 'admin@example.com'
