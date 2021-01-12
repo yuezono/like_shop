@@ -2,8 +2,10 @@ import logging
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import InquiryForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib import messages
+from .models import Shops
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +19,15 @@ class InquiryView(generic.FormView):
 
   def form_valid(self,form):
     form.send_email()
-    messages.success(self.request,'メッセージを送信しました')
-    logger.info('Inquiry sent by {}'.format(form,cleaned_data['name']))
+    messages.success(self.request,'メッセージを送信しました。')
+    logger.info('Inquiry sent by {}'.format(form.cleaned_data['name']))
     return super().form_valid(form)
+
+class ShopsListView(LoginRequiredMixin,generic.ListView):
+  model = Shops
+  template_name = 'shops_list.html'
+  paginate_by = 2
+
+  def get_queryset(self):
+    shopper = Shops.objects.filter(user=self.request.user).order_by('-created_at')
+    return shopper

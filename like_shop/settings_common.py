@@ -148,33 +148,33 @@ MESSAGE_TAGS = {
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-#django-allauthで利用するdjango.contrib.sitesを使う為にサイト識別用IDの設定
+# django-allauthで利用するdjango.contrib.sitesを使うためにサイト識別用IDを設定
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = (
-    'allauth.account.auth_backends.AuthentivationBackend',
-    #一般ユーザー用（メールアドレス認証）
-    'django.contrib.auth.backends.ModelBackend',
-    #管理サイト用（ユーザー名認証）
+    'allauth.account.auth_backends.AuthenticationBackend',  # 一般ユーザー用(メールアドレス認証)
+    'django.contrib.auth.backends.ModelBackend',  # 管理サイト用(ユーザー名認証)
 )
 
-#メールアドレス認証に変更する設定
-ACCOUNT_AUTHENTIVATION_METHOD = 'email'
-ACCOUNT_USERNAME_REQUIRED = False
+# # メールアドレス認証に変更する設定
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_USERNAME_REQUIRED = False
 
-#サインアップにメールアドレス確認をはさむよう設定
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_EMAIL_REQUIRED = True
+# # サインアップにメールアドレス確認を挟むよう設定
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_REQUIRED = True
 
-# #ログイン／ログラウト後の設定
-LOGIN_REDIRECT_URL = 'shops:index'
-ACCONT_LOGOUT_REDIRECT_URL = 'accont_login'
+# ログイン/ログアウト後の遷移先を設定
+LOGIN_REDIRECT_URL = 'shops:shops_list'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
-# #ログアウトリンクのクリックで一発でログアウトする設定
+# ログアウトリンクのクリック一発でログアウトする設定
 ACCOUNT_LOGOUT_ON_GET = True
 
-# #django-allauthが送信するメールの件名に自動される節頭辞をブランクにする設定
-ACCOUNT_EMAIL_SUBJECT_PREFIX =''
+# django-allauthが送信するメールの件名に自動付与される接頭辞をブランクにする設定
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
-# #デフォルトのメール送信元を設定
-DEFAULT_FORM_EMAIL = 'admin@example.com'
+# デフォルトのメール送信元を設定
+DEFAULT_FROM_EMAIL = 'admin@example.com'
+
+MEDIA_URL = '/media/'

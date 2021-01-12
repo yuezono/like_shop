@@ -27,6 +27,7 @@
 
   <body>
   <div id="wrapper">
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
       <div class="container">
@@ -39,18 +40,23 @@
             <li class="nav-item{% block active_inquiry %}{% endblock %}">
               <a class="nav-link" href="{% url 'shops:inquiry'%}">INQUIRY</a>
             </li>
+            {%if user.is_authenticated %}
+             <li class="nav-item{% block active_shops_list %}{% endblock %}">
+              <a class="nav-link" href="{% url 'shops:shops_list'%}">SHOPS LIST</a>
+             </li>
+            {% endif %}
           </ul>
           <ul class="navbar-nav ml-auto">
             {%if user.is_authenticated %}
               <li class='nav-item'>
-                <a class='nav-link' href="{% url 'account_logout'%}">Logout</a>
+                <a class='nav-link' href="{% url 'account_logout'%}">LOGOUT</a>
             </li>
             {% else %}  
               <li class='nav-item{% block active_signup %}{% endblock %}'>
-                <a class="nav-link" href="{% url 'account_signup'%}">Signup</a>
+                <a class="nav-link" href="{% url 'account_signup'%}">SIGNUP</a>
             </li>
-              <li class='nav-item{%block active_login %}{% endblock %}'>
-                <a class="nav-link" href="{% url 'account_login'%}">login</a>
+              <li class='nav-item{% block active_ %}{% endblock %}'>
+                <a class="nav-link" href="{% url 'account_login'%}">LOGIN</a>
               </li>
             {% endif %}
           </ul>
@@ -59,14 +65,15 @@
     </nav>
 
     {% block header %}{% endblock %}
-
+    {% block contents %}{% endblock %}
+    
     {% if messages %}
     <div class='container'>
       <div class='row'>
         <div class='my-dov-style w-100'>
           <ul class='messages' style='list-style:none;'>
-          {%for message in messagees%}
-          <li{%if message.tags %}class='{{message.tags}}'{%endif%}>
+          {%for message in messages%}
+          <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
             {{message}}
           </li>
           {%endfor%}
@@ -76,7 +83,6 @@
     </div>
     {%endif%}
 
-    {% block contents %}{% endblock %}
 
     <!-- Footer -->
     <footer class="py-5 bg-black">
