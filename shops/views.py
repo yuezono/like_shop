@@ -40,7 +40,7 @@ class ShopsCreateView(LoginRequiredMixin,generic.CreateView):
   model =Shops
   template_name = 'shops_create.html'
   form_class = ShopsCreateForm
-  success_url =reverse_lazy('shops:shops_list')
+  success_url = reverse_lazy('shops:shops_list')
 
   def form_valid(self,form):
     shops = form.save(commit=False)

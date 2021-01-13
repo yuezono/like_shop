@@ -1,5 +1,6 @@
 from django import forms
 from django.core.mail import EmailMessage
+
 from .models import Shops
 
 class InquiryForm(forms.Form):
@@ -43,12 +44,12 @@ class InquiryForm(forms.Form):
     message.send()
   
 class ShopsCreateForm(forms.ModelForm):
-  class Meta:
-    model = Shops
-    fields = ('title','content','photo1','photo2','photo3',)
+    class Meta:
+        model = Shops
+        fields = ('title', 'content', 'photo1', 'photo2', 'photo3', )
 
     def __init__(self,*args,**kwargs):
-      super().__init__(*args,**kwargs)
-      for field in self.fields.values():
-        field.widget.attrs['class']='form-control' 
+        super().__init__(*args,**kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class']='form-control' 
   
