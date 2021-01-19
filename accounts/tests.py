@@ -26,4 +26,4 @@ class TestLogin(LiveServerTestCase):
         self.selenium.find_element_by_class_name('btn').click()
 
         # ページタイトルの検証
-        self.assertEquals('Log In | LIKE SHOPS', self.selenium.title)
+        self.assertEquals('お店一覧|likeshop', self.selenium.title)

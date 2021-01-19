@@ -157,12 +157,12 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # # メールアドレス認証に変更する設定
-# ACCOUNT_AUTHENTICATION_METHOD = 'email'
-# ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
 
 # # サインアップにメールアドレス確認を挟むよう設定
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-# ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
 
 # ログイン/ログアウト後の遷移先を設定
 LOGIN_REDIRECT_URL = 'shops:shops_list'
@@ -178,3 +178,7 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 DEFAULT_FROM_EMAIL = 'admin@example.com'
 
 MEDIA_URL = '/media/'
+
+#バックアップパッチ用
+BACKUP_PATH ='backup/'
+NUM_SAVED_BACKUP = 30

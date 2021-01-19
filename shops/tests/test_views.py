@@ -42,10 +42,10 @@ class TestShopsCreateView(LoggedInTestCase):
         response = self.client.post(reverse_lazy('shops:shops_create'), params)
 
         # リストページへのリダイレクトを検証
-        # self.assertRedirects(response, reverse_lazy('shops:shops_list'))
+        self.assertRedirects(response, reverse_lazy('shops:shops_list'))
 
         # データがDBに登録されたかを検証
-        # self.assertEqual(Shops.objects.filter(title='テストタイトル').count(), 1)
+        self.assertEqual(Shops.objects.filter(title='テストタイトル').count(), 1)
 
     def test_create_shops_failure(self):
         """新規作成処理が失敗することを検証する"""
@@ -54,7 +54,7 @@ class TestShopsCreateView(LoggedInTestCase):
         response = self.client.post(reverse_lazy('shops:shops_create'))
 
         # 必須フォームフィールドが未入力によりエラーになることを検証
-        # self.assertFormError(response, 'form', 'title', 'このフィールドは必須です。')
+        self.assertFormError(response, 'form', 'title', 'このフィールドは必須です。')
 
 
 class TestShopsUpdateView(LoggedInTestCase):
@@ -73,10 +73,10 @@ class TestShopsUpdateView(LoggedInTestCase):
         response = self.client.post(reverse_lazy('shops:shops_update', kwargs={'pk': shops.pk}), params)
 
         # 詳細ページへのリダイレクトを検証
-        # self.assertRedirects(response, reverse_lazy('shops:shops_detail', kwargs={'pk': shops.pk}))
+        self.assertRedirects(response, reverse_lazy('shops:shops_detail', kwargs={'pk': shops.pk}))
 
         # データが編集されたかを検証
-        # self.assertEqual(Shops.objects.get(pk=shops.pk).title, 'タイトル編集後')
+        self.assertEqual(Shops.objects.get(pk=shops.pk).title, 'タイトル編集後')
 
     def test_update_shops_failure(self):
         """編集処理が失敗することを検証する"""
@@ -85,8 +85,7 @@ class TestShopsUpdateView(LoggedInTestCase):
         response = self.client.post(reverse_lazy('shops:shops_update', kwargs={'pk': 999}))
 
         # 存在しない日記データを編集しようとしてエラーになることを検証
-        self.assertEqual(response.status_code, 302)
-        #404だとエラーになる
+        self.assertEqual(response.status_code, 404)
 
 
 class TestShopsDeleteView(LoggedInTestCase):
@@ -102,10 +101,10 @@ class TestShopsDeleteView(LoggedInTestCase):
         response = self.client.post(reverse_lazy('shops:shops_delete', kwargs={'pk': shops.pk}))
 
         # リストページへのリダイレクトを検証
-        # self.assertRedirects(response, reverse_lazy('shops:shops_list'))
+        self.assertRedirects(response, reverse_lazy('shops:shops_list'))
 
         # データが削除されたかを検証
-        # self.assertEqual(Shops.objects.filter(pk=shops.pk).count(), 0)
+        self.assertEqual(Shops.objects.filter(pk=shops.pk).count(), 0)
 
     def test_delete_shops_failure(self):
         """削除処理が失敗することを検証する"""
@@ -114,4 +113,4 @@ class TestShopsDeleteView(LoggedInTestCase):
         response = self.client.post(reverse_lazy('shops:shops_delete', kwargs={'pk': 999}))
 
         # 存在しない日記データを削除しようとしてエラーになることを検証
-        # self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
