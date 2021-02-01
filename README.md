@@ -13,7 +13,7 @@
 詳細については、reqirements.txtを参照してください  
 python 3.7.2  
 django 3.1.1  
-Mac OS 
-##今後の運用
+Mac OS
+## 今後の運用
 AWSにて本番環境の運用。  
 HTTPS化を行う。
