@@ -4,7 +4,7 @@
 
 ## プレビュー
 ##### インデックスページ
-https://user-images.githubusercontent.com/69065472/106429700-22734980-64ae-11eb-9922-797aa145ecb3.mov
+![01](https://user-images.githubusercontent.com/69065472/106443166-86523e00-64bf-11eb-935c-917be05b485f.gif)
 ##### 投稿ページ
 
 ##### ログインページ(その他）
