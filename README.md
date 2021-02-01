@@ -9,5 +9,5 @@
 ## 要件
 詳細については、reqirements.txtを参照してください
 python 3.7.2
-django 2.1.5
+django 3.1.1
 Mac OS 
